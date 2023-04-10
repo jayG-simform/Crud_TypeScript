@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 5 cdn link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <script src="https://kit.fontawesome.com/5594ca95a7.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="/style.css">
+
+    <title>Crud operation | TS</title>
+</head>
+
+<body>
+    <div class="head-section">
+        <p>Product System</p>
+    </div>
+    <div class="sec container-fluid">
+        <div class="buttons row">
+            <div class="d-md-flex justify-content-between">
+                <span style="font-size: 25px; font-weight: 500;" class="ms-5"> Product Details</span>
+                <div class="d-flex">
+                    <!-- <input type="text" id="myInput" onkeyup="search()" class="me-3 col-sm-2" placeholder="Search By Ids.." title="Type in a Id"> -->
+                    <button type="button" value="Add Product" class="btnAdd col-sm-3 text-right me-5" data-bs-toggle="modal" data-bs-target="#productFormModal">
+                        Add Product <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>  
+        <div class="modal fade" id="productFormModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="productFormModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productFormModalLabel">Product Form</h5>
+                        
+                        <button type="button" style="border: none;" class="close operter" id="btnClose" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 20px; width: 100px; background-color: white;">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form enctype="multipart/form-data" id="product-form">
+                            <input type="hidden" class="modal-type">
+                            <!-- <input type="hidden" class="product-id" val> -->
+                            <div class="form-group">
+                                <label for="product-id" class="col-form-label">Product ID:</label>
+                                <input type="number" class="form-control" id="product-id">
+                            </div>
+                            <div class="form-group">
+                                <label for="productName" class="col-form-label">Product Name:</label>
+                                <input type="text" class="form-control" id="productName">
+                            </div>
+                            <div class="form-group">
+                                <label for="category" class="col-form-label">Category:</label>
+                                <input type="text" class="form-control" id="category">
+                            </div>
+                            <div class="form-group">
+                                <label for="price" class="col-form-label">Price:</label>
+                                <input type="number" class="form-control" id="price">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="imgUser" class="col-form-label">Image:</label>
+                                <input type="file" class="form-control" id="imgUser">
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="col-form-label">Description:</label>
+                                <textarea class="form-control" id="description" rows="6"></textarea>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary operter" id="btnClose" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary operter" id="btnAdd">Save Changes</button>
+                        <button id="btupdate" class="btn btn-primary" style="display: none;" value="Update">Update Changes</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="display_table" style="justify-content: center;">
+            <table id="dataDisplay" class="table table-sortable">
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                        <th>Product Category</th>
+                        <th>Product Description</th>
+                        <th>Image</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="main">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script src="./crud.js" type="module"></script>
+</body>
+
+</html>
