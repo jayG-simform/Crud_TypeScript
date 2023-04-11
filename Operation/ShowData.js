@@ -1,5 +1,7 @@
 import { viewModal, ProductId, ProductName, Price, Category, Description, img, btnUpdate, btnAdd, titles, types } from "../crud.js";
+import { Validation } from "./Validation.js";
 var showProduct;
+var validate = new Validation();
 export class Showdata {
     showData() {
         if (localStorage.getItem('ProductTS') == null) {
@@ -59,35 +61,35 @@ export class Showdata {
             let desc = Description.value;
             let product_img = img;
             if (product_img.value != '') {
-                const reader = new FileReader();
-                reader.readAsDataURL(product_img.files[0]);
-                reader.onload = function () {
-                    let url = reader.result;
+                if (validate.editValidate()) {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(product_img.files[0]);
+                    reader.onload = function () {
+                        let url = reader.result;
+                        product[index].ProductID = productID;
+                        product[index].Productname = name;
+                        product[index].Price = prices;
+                        product[index].Categorys = categorys;
+                        product[index].Description = desc;
+                        product[index].Photo = url;
+                        localStorage.setItem("ProductTS", JSON.stringify(product));
+                        location.reload();
+                        viewModal.reset();
+                    };
+                }
+            }
+            else {
+                if (validate.editValidate()) {
                     product[index].ProductID = productID;
                     product[index].Productname = name;
                     product[index].Price = prices;
                     product[index].Categorys = categorys;
                     product[index].Description = desc;
-                    product[index].Photo = url;
                     localStorage.setItem("ProductTS", JSON.stringify(product));
-                };
+                    location.reload();
+                    viewModal.reset();
+                }
             }
-            else {
-                product[index].ProductID = productID;
-                product[index].Productname = name;
-                product[index].Price = prices;
-                product[index].Categorys = categorys;
-                product[index].Description = desc;
-                localStorage.setItem("ProductTS", JSON.stringify(product));
-                // showData();
-            }
-            location.reload();
-            viewModal.reset();
-            ProductId.value = "";
-            ProductName.value = "";
-            Price.value = "";
-            Category.value = "";
-            Description.value = "";
         });
     }
     deleteData(index) {

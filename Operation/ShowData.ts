@@ -1,16 +1,18 @@
-import { viewModal,ProductId,ProductName,Price,Category,Description,img,btnUpdate,btnAdd,titles,types } from "../crud.js";
+import { viewModal, ProductId, ProductName, Price, Category, Description, img, btnUpdate, btnAdd, titles, types } from "../crud.js";
+import { Validation } from "./Validation.js";
 
 var showProduct: ShowP[];
 
-interface ShowP{
-    ProductID : string,
-    Productname : string,
-    Price : string,
-    Categorys : string,
-    Description : string,
-    Photo:any
+interface ShowP {
+    ProductID: string,
+    Productname: string,
+    Price: string,
+    Categorys: string,
+    Description: string,
+    Photo: any
 }
 
+var validate = new Validation();
 export class Showdata {
     showData() {
         if (localStorage.getItem('ProductTS') == null) {
@@ -70,16 +72,17 @@ export class Showdata {
         desc.value = product[index].Description;
 
         btnUpdate.addEventListener("click", function () {
-                console.log(index);
-                let productID = ProductId.value;
-                let name = ProductName.value;
-                let prices =Price.value;
-                let categorys = Category.value;
-                let desc = Description.value;
+            console.log(index);
+            let productID = ProductId.value;
+            let name = ProductName.value;
+            let prices = Price.value;
+            let categorys = Category.value;
+            let desc = Description.value;
 
-                let product_img = img;
+            let product_img = img;
 
-                if (product_img.value != '') {
+            if (product_img.value != '') {
+                if (validate.editValidate()) {
                     const reader = new FileReader();
 
                     reader.readAsDataURL(product_img.files[0]);
@@ -94,11 +97,15 @@ export class Showdata {
                         product[index].Photo = url;
 
                         localStorage.setItem("ProductTS", JSON.stringify(product));
+                        location.reload();
+                        viewModal.reset();
                     }
-
                 }
 
-                else {
+            }
+
+            else {
+                if (validate.editValidate()) {
                     product[index].ProductID = productID
                     product[index].Productname = name;
                     product[index].Price = prices;
@@ -106,18 +113,13 @@ export class Showdata {
                     product[index].Description = desc;
 
                     localStorage.setItem("ProductTS", JSON.stringify(product));
-                    // showData();
+                    location.reload();
+                    viewModal.reset();
                 }
-                location.reload();
-                viewModal.reset();
-                ProductId.value = "";
-                ProductName.value = "";
-                Price.value = "";
-                Category.value = "";
-                Description.value = "";
+            }
 
-            })
-        
+        })
+
     }
     deleteData(index: number) {
         var product: ShowP[];

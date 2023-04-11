@@ -8,6 +8,13 @@ export let Price = document.getElementById("price") as HTMLInputElement;
 export let Description = document.getElementById("description") as HTMLInputElement;
 export let Category = document.getElementById("category") as HTMLInputElement;
 
+export let errorID = document.getElementById("errorID");
+export let errorName = document.getElementById("errorName");
+export let errorPrice = document.getElementById("errorPrice");
+export let errorDesc = document.getElementById("errorDesc");
+export let errorCategory = document.getElementById("errorCategory");
+export let errorImg = document.getElementById("errorImg");
+
 export let img:any = document.getElementById("imgUser");
 export let viewModal:any = document.getElementById("productFormModal");
 
